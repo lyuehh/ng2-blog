@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BlogService } from '../services/blog.service';
 
 @Component({
   selector: 'blog',
@@ -7,19 +8,26 @@ import { Component } from '@angular/core';
       {{title}}
     </h1>
     <post-list [posts]="posts"></post-list>
-  `
+    <new-post (addPost)="addPost($event)"></new-post>
+  `,
+  providers: [BlogService]
 })
-export class BlogComponent {
+export class BlogComponent implements OnInit {
   title = 'Blog';
+  posts = [];
 
-  posts = [{
-    title: '标题11',
-    author: '作者11',
-    content: '内容11'
-  },
-  {
-    title: '标题22',
-    author: '作者22',
-    content: '内容22'
-  }]
+  constructor(private blogService: BlogService) { }
+
+  getPosts(): void {
+    this.blogService.getPosts().then(posts => this.posts = posts)
+  }
+
+  addPost(post): void {
+    this.blogService.addPost(post)
+  }
+
+  ngOnInit():void {
+    this.getPosts()
+  }
+
 }

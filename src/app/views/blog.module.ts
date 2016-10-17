@@ -6,13 +6,15 @@ import { HttpModule } from '@angular/http';
 import { BlogComponent } from './blog.component';
 import { PostListComponent } from '../components/PostList.component'
 import { PostComponent } from '../components/Post.component'
+import { NewPostComponent } from '../components/NewPost.component'
 
 @NgModule({
   // 声明组件
   declarations: [
     BlogComponent,
     PostListComponent,
-    PostComponent
+    PostComponent,
+    NewPostComponent
   ],
 
   // 导入模块
